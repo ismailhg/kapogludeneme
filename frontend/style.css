@@ -27,7 +27,7 @@ body {
 /* Mobil için logo boyutu ayarı */
 @media (max-width: 991px) {
   .custom-navbar {
-    padding-top: 20px;
+    padding-top: 20px; /* Üst kısmı büyütmek için padding-top değerini artırdım */
     height: 115px;
   }
   .navbar-logo {
