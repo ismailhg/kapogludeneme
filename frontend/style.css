@@ -5,14 +5,8 @@
 body {
   font-family: "Outfit", sans-serif;
 }
-
-.logo-img {
-  max-height: 95px;
-  object-fit: contain;
-}
 /* Navbar stilleri */
 .custom-navbar {
-  margin-top:15px;
   background-color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 0 0 50px 50px;
@@ -32,6 +26,10 @@ body {
 
 /* Mobil için logo boyutu ayarı */
 @media (max-width: 991px) {
+  .custom-navbar {
+    padding-top: 20px; /* Üst kısmı büyütmek için padding-top değerini artırdım */
+    height: 115px;
+  }
   .navbar-logo {
     max-height: 85px;
   }
@@ -103,7 +101,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   width: 90%;
-  margin: 100px auto 0;
+  margin: 120px auto 0;
   border-radius: 50px;
 }
 
