@@ -30,9 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
       toggleMenu();
     }
   });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
+  // Hero resim geçişi
   const heroSection = document.getElementById("hero");
   const images = [
     "assests/img/image3.jpg",
@@ -43,48 +42,30 @@ document.addEventListener("DOMContentLoaded", function () {
   let next = 1;
 
   // İlk resmi hemen göster
-  heroSection.style.background = `
-      linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-      url('${images[current]}') center/cover no-repeat
-    `;
+  heroSection.style.background = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${images[current]}') center/cover no-repeat`;
 
   // Arkaplan resmini değiştiren fonksiyon
   function changeBackground() {
-    // Geçiş için bir overlay div oluştur
     const overlay = document.createElement("div");
     overlay.className = "hero-overlay";
-    overlay.style.backgroundImage = `
-        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-        url('${images[next]}')
-      `;
+    overlay.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${images[next]}')`;
     heroSection.appendChild(overlay);
 
-    // Overlay'i yavaşça görünür yap
     setTimeout(() => {
       overlay.style.opacity = 1;
     }, 50);
 
-    // Geçiş tamamlandığında
     setTimeout(() => {
-      // Ana arkaplanı güncelle
-      heroSection.style.background = `
-          linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-          url('${images[next]}') center/cover no-repeat
-        `;
-      // Overlay'i kaldır
+      heroSection.style.background = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${images[next]}') center/cover no-repeat`;
       heroSection.removeChild(overlay);
 
-      // Sonraki gösterilecek resmi belirle
       current = next;
       next = (next + 1) % images.length;
     }, 1000);
   }
 
-  // Düzenli aralıklarla resimleri değiştir
   setInterval(changeBackground, 5000);
-});
 
-document.addEventListener("DOMContentLoaded", function () {
   // AOS Animasyon Başlatma
   AOS.init({
     duration: 600,
@@ -110,15 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
       prevEl: ".swiper-button-prev",
     },
     breakpoints: {
-      640: {
-        slidesPerView: 1,
-      },
-      768: {
-        slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: 3,
-      },
+      640: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
     },
   });
 
@@ -132,15 +107,9 @@ document.addEventListener("DOMContentLoaded", function () {
       disableOnInteraction: false,
     },
     breakpoints: {
-      640: {
-        slidesPerView: 3,
-      },
-      768: {
-        slidesPerView: 4,
-      },
-      1024: {
-        slidesPerView: 5,
-      },
+      640: { slidesPerView: 3 },
+      768: { slidesPerView: 4 },
+      1024: { slidesPerView: 5 },
     },
   });
 
@@ -158,11 +127,16 @@ document.addEventListener("DOMContentLoaded", function () {
         counter.innerText = Math.ceil(data + time);
         setTimeout(animate, 50);
       } else {
-        counter.innerText = value;
+        if (
+          counter.parentElement.querySelector("p").innerText === "Memnuniyet"
+        ) {
+          counter.innerText = "%" + value;
+        } else {
+          counter.innerText = value;
+        }
       }
     };
 
-    // Sayaç görünür olduğunda başlat
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -176,26 +150,21 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     observer.observe(counter);
   });
-});
 
-//Whatsapp
-document.addEventListener("DOMContentLoaded", function () {
+  // Whatsapp Linki
   const phoneNumber = "905xxxxxxxxx";
   const message = "Merhaba, websiteniz aracılığıyla size ulaşıyorum.";
   const encodedMessage = encodeURIComponent(message);
-  const whatsappLink = `https://wa.me/${905469415774}?text=${encodedMessage}`;
-
+  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
   document.getElementById("whatsappLink").setAttribute("href", whatsappLink);
-});
-///iletisim formu
-document.addEventListener("DOMContentLoaded", () => {
+
+  // İletişim Formu
   const form = document.getElementById("iletisimFormu");
   const emailInput = form.querySelector('input[name="email"]');
   const phoneInput = form.querySelector('input[name="phone"]');
   const emailFeedback = document.getElementById("emailFeedback");
   const phoneFeedback = document.getElementById("phoneFeedback");
 
-  // Inputmask kütüphanesini kullanarak telefon numarasına maske ekleyin
   const phoneMask = new Inputmask("+\\9\\0 (599) 999 99 99");
   phoneMask.mask(phoneInput);
 
@@ -214,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // E-posta doğrulama
   emailInput.addEventListener("input", () => {
     const isValid = validateEmail(emailInput.value);
     setValidationState(
@@ -231,7 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let isFormValid = true;
 
-    // Zorunlu alanları kontrol et
     form.querySelectorAll("[required]").forEach((input) => {
       if (!input.value.trim()) {
         input.classList.add("is-invalid");
